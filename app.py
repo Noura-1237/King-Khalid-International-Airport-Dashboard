@@ -3,14 +3,13 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
 
-# --- 1. إعدادات الصفحة الأساسية للمتصفح ---
+
 st.set_page_config(
     page_title="KKIA Flights Dashboard",
     page_icon="✈️",
     layout="wide"
 )
 
-# --- 2. تصفيف مخصص بالـ CSS للعنوان الرئيسي والعناوين الجانبية ---
 st.markdown("""
     <style>
     .main-title {
@@ -32,10 +31,10 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- 3. تحميل البيانات ومعالجتها التلقائية ---
+
 @st.cache_data
 def load_data():
-    # تأكدي أن ملف الـ CSV موجود في نفس مجلد ملف الكود app.py
+    
     df = pd.read_csv('final_cleaned_flights_RUH.csv')
     df['scheduled_time_local'] = pd.to_datetime(df['scheduled_time_local'])
     df['hour'] = df['scheduled_time_local'].dt.hour
@@ -44,10 +43,8 @@ def load_data():
 df = load_data()
 sns.set_theme(style="whitegrid")
 
-# --- 4. تصميم الشريط الجانبي (Sidebar الفلاتر) ---
 st.sidebar.header("🔍 Filter Options")
 
-# فلتر اختيار الصالة
 all_terminals = sorted([str(t) for t in df['terminal'].unique() if str(t) not in ['Unknown', 'nan']])
 selected_terminals = st.sidebar.multiselect(
     "Select Terminal(s):",
@@ -63,26 +60,24 @@ selected_flight_types = st.sidebar.multiselect(
     default=all_flight_types
 )
 
-# تحويل عمود الصالة لنصوص مؤقتاً لضمان مطابقة الفلتر بدقة
 df_filtered_prep = df.copy()
 df_filtered_prep['terminal'] = df_filtered_prep['terminal'].astype(str)
 
-# تطبيق الفلاتر التفاعلية
+
 filtered_df = df_filtered_prep[
     (df_filtered_prep['terminal'].isin(selected_terminals)) & 
     (df_filtered_prep['flight_type'].isin(selected_flight_types))
 ]
 
-# حسابات المؤشرات (KPIs) بناءً على الفلتر الحالي
+
 canceled_flights_df = filtered_df[filtered_df['status'] == 'Canceled']
 canceled_count = len(canceled_flights_df)
 total_flights = len(filtered_df)
 canceled_rate = (canceled_count / total_flights * 100) if total_flights > 0 else 0.0
 
-# --- 5. الواجهة الرئيسية والعنوان ---
 st.markdown("<div class='main-title'>✈️ King Khalid International Airport (KKIA) Descriptive Analytics Dashboard</div>", unsafe_allow_html=True)
 
-# --- 6. قسم المؤشرات العلوية (KPIs) ---
+
 kpi_col1, kpi_col2, kpi_col3 = st.columns(3)
 
 with kpi_col1:
@@ -102,7 +97,7 @@ with kpi_col3:
 
 st.markdown("<br/>", unsafe_allow_html=True)
 
-# --- 7. قسم الرسوم البيانية المتجاورة (1 و 2) ---
+
 plot_col1, plot_col2 = st.columns(2)
 
 with plot_col1:
@@ -144,7 +139,7 @@ with plot_col2:
         
     st.info("**💡 Insight:** Identifies the dominant aircraft models, helping ground operations plan gate sizing and parking effectively.")
 
-# --- 8. قسم الرسمة الثالثة (عرض كامل الصفحة) ---
+
 st.markdown("<div class='section-header'>⏰ 3. Comparison of Peak Hours: Arrivals vs Departures</div>", unsafe_allow_html=True)
 if not filtered_df.empty:
     fig, ax = plt.subplots(figsize=(12, 3.5))
@@ -162,7 +157,6 @@ else:
 
 st.info("**💡 Insight:** Maps out peak operational intervals to schedule customs, security, and baggage handling shifts during busy times.")
 
-# --- 9. قسم الرسوم البيانية المتجاورة (4 و 5) ---
 plot_col3, plot_col4 = st.columns(2)
 
 with plot_col3:
@@ -184,7 +178,7 @@ with plot_col3:
 
 with plot_col4:
     st.markdown("<div class='section-header'>📦 5. Boxplot of Flight Hours by Terminal</div>", unsafe_allow_html=True)
-    # تصفية الصالات الشهيرة من 1 إلى 5 فقط للرسمة الصندوقية
+
     popular_terminals = filtered_df[filtered_df['terminal'].isin(['1', '2', '3', '4', '5'])]
     
     if not popular_terminals.empty:
@@ -202,12 +196,11 @@ with plot_col4:
         
     st.info("**💡 Insight:** Compares the density spread of flights per terminal; a tighter box indicates highly condensed flight arrivals or departures.")
 
-# --- 10. قسم الشركات الأكثر إلغاءً والجدول السفلي ---
+
 st.markdown("<div class='section-header'>🚨 6. Top 5 Airlines with Flight Cancellations</div>", unsafe_allow_html=True)
 top_canceled_airlines = canceled_flights_df['airline_name'].value_counts().head(5)
 
 if not top_canceled_airlines.empty:
-    # تحويل البيانات إلى DataFrame لعرضها بشكل جدول تفاعلي منظم بدلاً من نص مطبوع
     canceled_df_display = top_canceled_airlines.reset_index()
     canceled_df_display.columns = ['Airline Name', 'Canceled Flights Count']
     st.dataframe(canceled_df_display, use_container_width=True)
@@ -215,7 +208,6 @@ else:
     st.success("Great! No canceled flights found for the current filters.")
 st.info("**💡 Insight:** Acts as a KPI to monitor and evaluate airline reliability, providing data evidence to hold specific operators accountable.")
 
-# --- 11. مستكشف ومحمل البيانات المفلترة ---
 st.markdown("<div class='section-header'>📋 Filtered Data Explorer & Download</div>", unsafe_allow_html=True)
 action_col1, action_col2 = st.columns([3, 1])
 with action_col2:
