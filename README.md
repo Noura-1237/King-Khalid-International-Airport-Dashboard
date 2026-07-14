@@ -14,7 +14,7 @@ to explore air traffic patterns, operational efficiency, and scheduling trends.
 Dataset Name:King Khalid International Airport Flights Dataset
 Source: Kaggle and collected from multiple aviation and flight-tracking APIs
 
-## Dataset Features
+# Dataset Features
 
 The cleaned dataset contains 18 refined columns used for analysis and visualization:
 
@@ -44,7 +44,7 @@ The cleaned dataset contains 18 refined columns used for analysis and visualizat
   * scheduled_time_local - The scheduled flight time in local Riyadh time.
   * hour - The specific hour extracted from the flight schedule for hourly traffic trend analysis.
   * 
-  * ## Key Findings & Insights
+  * # Key Findings & Insights
 
 * Operational Patterns: Peak traffic hours and workload are unevenly distributed, with specific terminals bearing a significantly higher volume than others.
 * Flight Schedules: A strong correlation exists between flight types and their daily schedules, directly impacting terminal density throughout the 24-hour cycle.
