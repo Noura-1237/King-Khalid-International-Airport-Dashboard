@@ -52,7 +52,7 @@ selected_terminals = st.sidebar.multiselect(
     default=all_terminals
 )
 
-# فلتر نوع الرحلة (وصول / مغادرة)
+
 all_flight_types = df['flight_type'].unique()
 selected_flight_types = st.sidebar.multiselect(
     "Select Flight Type(s):",
