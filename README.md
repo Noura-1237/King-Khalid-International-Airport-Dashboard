@@ -45,7 +45,7 @@ The cleaned dataset contains 18 refined columns used for analysis and visualizat
   * scheduled_time_local - The scheduled flight time in local Riyadh time.
   * hour - The specific hour extracted from the flight schedule for hourly traffic trend analysis.
   * 
-  * # Key Findings & Insights
+   # Key Findings & Insights
 
 * Operational Patterns: Peak traffic hours and workload are unevenly distributed, with specific terminals bearing a significantly higher volume than others.
 * Flight Schedules: A strong correlation exists between flight types and their daily schedules, directly impacting terminal density throughout the 24-hour cycle.
@@ -55,7 +55,7 @@ The cleaned dataset contains 18 refined columns used for analysis and visualizat
 # 🔗 Live Demo
    [open the live Dashboard](https://king-khalid-international-airport-dashboard-evfmphpxyafimrslwh.streamlit.app/)
 
-* # Tech Stack
+ # Tech Stack
 
 * Language: Python
 * Web Framework: Streamlit
