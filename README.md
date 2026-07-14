@@ -53,8 +53,8 @@ The cleaned dataset contains 18 refined columns used for analysis and visualizat
 * Key Takeaway: The dashboard delivers data-driven insights to help optimize staffing, resource allocation, and terminal gate planning while evaluating airline reliability.
 
 # 🔗 Live Demo
-[open the live Dashboard](https://king-khalid-international-airport-dashboard-evfmphpxyafimrslwh.streamlit.app/)
-* 
+   [open the live Dashboard](https://king-khalid-international-airport-dashboard-evfmphpxyafimrslwh.streamlit.app/)
+
 * # Tech Stack
 
 * Language: Python
