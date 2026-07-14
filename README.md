@@ -12,6 +12,7 @@ to explore air traffic patterns, operational efficiency, and scheduling trends.
 
 # Dataset
 Dataset Name:King Khalid International Airport Flights Dataset
+
 Source: Kaggle and collected from multiple aviation and flight-tracking APIs
 
 # Dataset Features
@@ -51,8 +52,10 @@ The cleaned dataset contains 18 refined columns used for analysis and visualizat
 * Airlines & Outliers: A few airlines stood out with exceptionally high cancellation rates, signaling potential operational instability.
 * Key Takeaway: The dashboard delivers data-driven insights to help optimize staffing, resource allocation, and terminal gate planning while evaluating airline reliability.
 
+# 🔗 Live Demo
+[open the live Dashboard](https://king-khalid-international-airport-dashboard-evfmphpxyafimrslwh.streamlit.app/)
 * 
-* ## Tech Stack
+* # Tech Stack
 
 * Language: Python
 * Web Framework: Streamlit
